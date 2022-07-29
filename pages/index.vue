@@ -1,7 +1,44 @@
 <template>
-  <Tutorial/>
+  <div>
+    <h1>Events</h1>
+
+    <EventCard
+      v-for="(event, index) in events"
+      :key="index"
+      :event="event"
+      :data-index="index"
+    />
+  </div>
 </template>
 
 <script>
-export default {}
+import EventCard from '~/components/EventCard.vue';
+
+export default {
+  components: {
+    EventCard
+  },
+  head() {
+      return {
+        title: 'Event Listing - Real world Events',
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'Where can you find all the events in your neighborhood?'
+          }
+        ]
+    };
+  },
+  asyncData({ $axios, error }) {
+    return $axios.$get('http://localhost:3000/events').then(response => {
+
+      return {
+        events: response
+      };
+    }).catch( err => {
+      error({StatusCode: 503, Message: 'Service Unavailable'});
+    });
+  },
+}
 </script>
