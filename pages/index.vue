@@ -12,33 +12,33 @@
 </template>
 
 <script>
-import EventCard from '~/components/EventCard.vue';
+  import EventCard from "~/components/EventCard.vue";
 
-export default {
-  components: {
-    EventCard
-  },
-  head() {
+  export default {
+    components: {
+      EventCard,
+    },
+    head() {
       return {
-        title: 'Event Listing - Real world Events',
+        title: "Event Listing - Real world Events",
         meta: [
           {
-            hid: 'description',
-            name: 'description',
-            content: 'Where can you find all the events in your neighborhood?'
-          }
-        ]
-    };
-  },
-  asyncData({ $axios, error }) {
-    return $axios.$get('http://localhost:3000/events').then(response => {
-
-      return {
-        events: response
+            hid: "description",
+            name: "description",
+            content: "Where can you find all the events in your neighborhood?",
+          },
+        ],
       };
-    }).catch( err => {
-      error({StatusCode: 503, Message: 'Service Unavailable'});
-    });
-  },
-}
+    },
+    async asyncData({ $axios, error }) {
+      try {
+        const data = await $axios.$get("http://localhost:3000/events");
+        return {
+          events: data,
+        };
+      } catch (e) {
+          error({StatusCode: 503, Message: 'Service Unavailable'});
+      }
+    },
+  };
 </script>

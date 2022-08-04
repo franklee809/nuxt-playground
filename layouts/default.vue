@@ -6,20 +6,20 @@
 </template>
 
 <script>
-import NavBar from '~/components/NavBar.vue';
+  import NavBar from "~/components/NavBar.vue";
 
-export default {
-  head(){
-    return {
-      titleTemplate: '%s - Real world Events',
-      meta: 'description',
-      content: 'What you can find all the events in your neighborhood?',
-    }
-  },
-  components: {
-    NavBar,
-  }
-}
+  export default {
+    head() {
+      return {
+        titleTemplate: "%s - Real world Events",
+        meta: "description",
+        content: "What you can find all the events in your neighborhood?",
+      };
+    },
+    components: {
+      NavBar,
+    },
+  };
 </script>
 <style>
   html {
